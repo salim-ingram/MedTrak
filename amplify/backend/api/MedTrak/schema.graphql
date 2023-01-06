@@ -1,0 +1,9 @@
+type Medication @model @auth(rules: [{allow: owner}]) {
+  id: ID!
+  medName: String
+  medQuantity: Int
+  daysLeft: Int
+  medStrength: Int
+  dailyDose: Int
+}
+ 
