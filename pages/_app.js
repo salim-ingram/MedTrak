@@ -7,13 +7,16 @@ import "@fontsource/inter";
 import "../styles/globals.css";
 
 import awsconfig from "../aws-exports";
+import React from "react";
 Amplify.configure(awsconfig);
 
 function MyApp({ Component, pageProps }) {
   return (
-    <AmplifyProvider theme={studioTheme}>
-      <Component {...pageProps} />
-    </AmplifyProvider>
+    <React.StrictMode>
+      <AmplifyProvider theme={studioTheme}>
+        <Component {...pageProps} />
+      </AmplifyProvider>
+    </React.StrictMode>
   );
 }
 export default MyApp;
