@@ -4,6 +4,9 @@ import { useState } from 'react';
 
 import { withAuthenticator } from '@aws-amplify/ui-react';
 import { Auth } from 'aws-amplify';
+import { useRouter } from 'next/router';
+
+const router = useRouter()
 
 function Dashboard ({ signOut }) {
 
@@ -26,6 +29,7 @@ function Dashboard ({ signOut }) {
           <NavBar 
             width={'100%'}
             overrides={{
+              Button36563453: { onClick: () => {router.push('/dashboard')}},
               Button36472923: { onClick: () => setShowAddModal(true)},
               Button36562808: { onMouseEnter: () => setShowAccountDrop(true) }
             }}
