@@ -4,16 +4,17 @@ import { HeroLayout4 } from '../ui-components';
 import { useRouter } from 'next/router';
 
 function index() {
-  const router = useRouter();
+  const router = useRouter()
+  const signUp = () => {
+    router.push('/dashboard');
+  }
   return (
     <View paddingTop='5%' paddingBottom='5%'>
       <HeroLayout4
         width={'100%'}
         paddingLeft={'10%'}
         paddingRight={'20%'}
-        handleClick={() => {
-          router.push('/dashboard')
-        }} />
+        handleClick={signUp} />
     </View>
   );
 }
