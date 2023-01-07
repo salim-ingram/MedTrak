@@ -3,7 +3,7 @@ import { View } from '@aws-amplify/ui-react';
 import { HeroLayout4 } from '../ui-components';
 import { useRouter } from 'next/router';
 
-function index() {
+function Index() {
   const router = useRouter()
   const signUp = () => {
     router.push('/sign-in');
@@ -19,4 +19,4 @@ function index() {
 
   );
 }
-export default index;
+export default Index;

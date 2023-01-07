@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import { withAuthenticator } from '@aws-amplify/ui-react';
 
 
-function authPage() {
+function AuthPage() {
   const router = useRouter()
   const signIn = () => {
     router.push('/dashboard');
@@ -13,5 +13,5 @@ function authPage() {
     signIn()
   );
 }
-export default withAuthenticator(authPage);
+export default withAuthenticator(AuthPage);
 
