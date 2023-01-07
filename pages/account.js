@@ -7,13 +7,10 @@ import { Auth } from 'aws-amplify';
 import { useRouter } from 'next/router';
 import { DataStore } from 'aws-amplify'
 
-function Dashboard ({ signOut }) {
+function Account ({ signOut }) {
   const router = useRouter()
   const dashClick = () => {
     router.push('/dashboard');
-  }
-  const accountClick = () => {
-    router.push('/account');
   }
   
   const user = Auth.currentUserInfo({
@@ -35,7 +32,7 @@ function Dashboard ({ signOut }) {
           <NavBar 
             width={'100%'}
             overrides={{
-              Button36563453: { onClick: () => {dashClick}},
+              Button36563453: { onClick: () => {dashClick()}},
               Button36472923: { onClick: () => setShowAddModal(true)},
               Button36562808: { onMouseEnter: () => setShowAccountDrop(true) }
             }}
@@ -62,59 +59,16 @@ function Dashboard ({ signOut }) {
                     onClick: async () => {
                       signOut()
                     }
-                  },
-                  Button36663070: {
-                    onClick: async () => {
-                      accountClick()
-                    }
                   }
                 }}
               /> 
           </div>
 
       <div className='center'>
-        <div className='MedCollectionContainer'>
-        <MedCardCollection overrideItems={({ item, idx }) => {
-        return {
-          overrides: {
-            edit: {
-              as: 'button',
-              onClick: () => {
-                setShowUpdateModal(true)
-                setUpdateMed(item)
-              }
-            }
-          }
-        }
-      }}
-      />
-        </div>
-      </div>
-      <div className='modal' style={{ display: showAddModal === false && 'none' }}>
-        <AddMedForm 
-          overrides={{ 
-            Icon: {
-              as: 'button',
-              onClick: () => setShowAddModal(false)
-            }
-          }}
-        />
-      </div>
-      <div className='modal' style={{ display: showUpdateModal === false && 'none' }}>
-
-        <UpdateMedForm
-          {...Button => (this.btn = Button)}
-          medication={updateMed}
-          overrides={{
-            Icon: {
-              as: 'button',
-              onClick: () => setShowUpdateModal(false)
-            }
-          }}
-        />
+        <h1>hi!</h1>
       </div>
     </>
   );
 }
 
-export default withAuthenticator(Dashboard);
+export default withAuthenticator(Account);
