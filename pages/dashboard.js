@@ -38,6 +38,15 @@ function Dashboard ({ signOut }) {
     );
   }
 
+  async function setDays(item) {
+    const original = await DataStore.query(Medication, item);
+    await DataStore.save(
+      Medication.copyOf(original, updated => {
+        updated.daysLeft = Math.floor((original.medQuantity / original.dailyDose))
+      })
+    );
+  }
+
   return (
     <>
         <div className='NavBar'>
@@ -84,6 +93,9 @@ function Dashboard ({ signOut }) {
       <div className='center'>
         <div className='MedCollectionContainer'>
         <MedCardCollection overrideItems={({ item, idx }) => {
+          async () => {
+            setDays(item)
+          }
         return {
           overrides: {
             edit: {
@@ -97,7 +109,7 @@ function Dashboard ({ signOut }) {
               as: 'button',
               onClick: async () => {
                 updateQuantity(item)
-              }
+            }
             }
           }
         }

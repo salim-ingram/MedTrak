@@ -1,11 +1,11 @@
 
-import { NavBar, MedCardCollection, AddMedForm, UpdateMedForm, AccountDropDown } from '../ui-components';
+import { NavBar, AccountDropDown } from '../ui-components';
 import { useState } from 'react';
 
 import { withAuthenticator } from '@aws-amplify/ui-react';
 import { Auth } from 'aws-amplify';
 import { useRouter } from 'next/router';
-import { DataStore } from 'aws-amplify'
+import { AccountSettings } from '@aws-amplify/ui-react';
 
 function Account ({ signOut }) {
   const router = useRouter()
@@ -21,10 +21,15 @@ function Account ({ signOut }) {
     })
     .catch((err) => console.log(err));
 
-  const [showAddModal, setShowAddModal] = useState(false)
-  const [showUpdateModal, setShowUpdateModal] = useState(false)
   const [showAccountDrop, setShowAccountDrop] = useState(false)
-  const [updateMed, setUpdateMed] = useState()
+  const [showPasswordModal, setShowPasswordModal] = useState(false)
+  const [showUpdateModal, setShowUpdateModal] = useState(false)
+
+  function ChangePassword() {
+      return (
+        <AccountSettings.ChangePassword />
+      );
+  }
 
   return (
     <>
@@ -33,7 +38,6 @@ function Account ({ signOut }) {
             width={'100%'}
             overrides={{
               Button36563453: { onClick: () => {dashClick()}},
-              Button36472923: { onClick: () => setShowAddModal(true)},
               Button36562808: { onMouseEnter: () => setShowAccountDrop(true) }
             }}
           />
@@ -65,7 +69,7 @@ function Account ({ signOut }) {
           </div>
 
       <div className='center'>
-        <h1>hi!</h1>
+        <button onClick={ChangePassword}>Change Password</button>
       </div>
     </>
   );
