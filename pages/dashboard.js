@@ -6,10 +6,10 @@ import { withAuthenticator } from '@aws-amplify/ui-react';
 import { Auth } from 'aws-amplify';
 import { useRouter } from 'next/router';
 
-const router = useRouter()
-
 function Dashboard ({ signOut }) {
 
+  const router = useRouter()
+  
   const user = Auth.currentUserInfo({
     bypassCache: false // Optional, By default is false. If set to true, this call will send a request to Cognito to get the latest user data
   })
