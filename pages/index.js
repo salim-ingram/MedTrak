@@ -2,6 +2,7 @@ import React from 'react';
 import { View } from '@aws-amplify/ui-react';
 import { HeroLayout4 } from '../ui-components';
 import { useRouter } from 'next/router';
+import { withAuthenticator } from '@aws-amplify/ui-react';
 
 function index() {
   const router = useRouter();

@@ -5,20 +5,20 @@ import { useState } from 'react';
 import { withAuthenticator } from '@aws-amplify/ui-react';
 import { Auth } from 'aws-amplify';
 
-const user = Auth.currentUserInfo({
+function Dashboard ({ signOut }) {
+
+  const user = Auth.currentUserInfo({
     bypassCache: false // Optional, By default is false. If set to true, this call will send a request to Cognito to get the latest user data
   })
-    .then((user) => {
-        return user;
+    .then((user) => { 
+      return user;
     })
     .catch((err) => console.log(err));
 
-function Dashboard ({ signOut }) {
-
-    const [showAddModal, setShowAddModal] = useState(false)
-    const [showUpdateModal, setShowUpdateModal] = useState(false)
-    const [showAccountDrop, setShowAccountDrop] = useState(false)
-    const [updateMed, setUpdateMed] = useState()
+  const [showAddModal, setShowAddModal] = useState(false)
+  const [showUpdateModal, setShowUpdateModal] = useState(false)
+  const [showAccountDrop, setShowAccountDrop] = useState(false)
+  const [updateMed, setUpdateMed] = useState()
 
   return (
     <>
