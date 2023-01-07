@@ -60,3 +60,10 @@ code {
   -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
 }
+
+.accountSettings {
+  margin: 0;
+  position: relative;
+  padding-top: 10%;
+  left: 5%;
+}

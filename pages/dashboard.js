@@ -53,7 +53,7 @@ function Dashboard ({ signOut }) {
           <NavBar 
             width={'100%'}
             overrides={{
-              Button36563453: { onClick: () => {dashClick}},
+              Button36563453: { onClick: () => {dashClick()}},
               Button36472923: { onClick: () => setShowAddModal(true)},
               Button36562808: { onMouseEnter: () => setShowAccountDrop(true) }
             }}
@@ -93,9 +93,7 @@ function Dashboard ({ signOut }) {
       <div className='center'>
         <div className='MedCollectionContainer'>
         <MedCardCollection overrideItems={({ item, idx }) => {
-          async () => {
-            setDays(item)
-          }
+          setDays(item)
         return {
           overrides: {
             edit: {
