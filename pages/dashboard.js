@@ -1,11 +1,12 @@
 
 import { NavBar, MedCardCollection, AddMedForm, UpdateMedForm, AccountDropDown } from '../ui-components';
+import { DataStore } from '@aws-amplify/datastore';
+import { Medication } from '../models';
 import { useState } from 'react';
 
 import { withAuthenticator } from '@aws-amplify/ui-react';
 import { Auth } from 'aws-amplify';
 import { useRouter } from 'next/router';
-import { DataStore } from 'aws-amplify'
 
 function Dashboard ({ signOut }) {
   const router = useRouter()
@@ -15,7 +16,6 @@ function Dashboard ({ signOut }) {
   const accountClick = () => {
     router.push('/account');
   }
-  
   const user = Auth.currentUserInfo({
     bypassCache: false // Optional, By default is false. If set to true, this call will send a request to Cognito to get the latest user data
   })
@@ -28,6 +28,15 @@ function Dashboard ({ signOut }) {
   const [showUpdateModal, setShowUpdateModal] = useState(false)
   const [showAccountDrop, setShowAccountDrop] = useState(false)
   const [updateMed, setUpdateMed] = useState()
+
+  async function updateQuantity(item) {
+    const original = await DataStore.query(Medication, item);
+    await DataStore.save(
+      Medication.copyOf(original, updated => {
+        updated.medQuantity = (original.medQuantity - 1)
+      })
+    );
+  }
 
   return (
     <>
@@ -82,6 +91,12 @@ function Dashboard ({ signOut }) {
               onClick: () => {
                 setShowUpdateModal(true)
                 setUpdateMed(item)
+              }
+            },
+            Button: {
+              as: 'button',
+              onClick: async () => {
+                updateQuantity(item)
               }
             }
           }
