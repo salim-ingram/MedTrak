@@ -1,10 +1,10 @@
 import React from 'react';
 import { View } from '@aws-amplify/ui-react';
 import { HeroLayout4 } from '../ui-components';
-import { UseRouter } from 'next/router';
+import { useRouter } from 'next/router';
 
 function index() {
-  const router = UseRouter();
+  const router = useRouter();
   return (
     <View paddingTop='5%' paddingBottom='5%'>
       <HeroLayout4
