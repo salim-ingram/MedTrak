@@ -1,17 +1,15 @@
 
-import { NavBar, AccountDropDown, AddMedForm } from '../ui-components';
+import AccountPage from '../components/AccountPage'
+import MyInfo from '../components/MyInfo';
 import { useState } from 'react';
 
-import { Auth } from 'aws-amplify';
+import { useAuth } from '@aws-amplify/ui-react/internal';
 import { useRouter } from 'next/router';
 import { AccountSettings, Card, withAuthenticator } from '@aws-amplify/ui-react';
 
-function Account ({ signOut }) {
+function Account () {
+  const authAttributes = useAuth().user?.attributes ?? {};
   const router = useRouter()
-  const dashClick = () => {
-    router.push('/dashboard');
-  }
-
   const handleSuccessPassword = () => {
     alert('password is successfully changed!')
   }
@@ -19,85 +17,74 @@ function Account ({ signOut }) {
   const handleSuccessUser = () => {
     alert('user has been successfully deleted')
   }
-
-  const user = Auth.currentUserInfo({
-    bypassCache: false // Optional, By default is false. If set to true, this call will send a request to Cognito to get the latest user data
-  })
-    .then((user) => { 
-      return user;
-    })
-    .catch((err) => console.log(err));
-
-  const [showAddModal, setShowAddModal] = useState(false)
-  const [showAccountDrop, setShowAccountDrop] = useState(false)
-  const [showPasswordModal, setShowPasswordModal] = useState(false)
-  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  
+  const[showMyInfoDiv, setShowMyInfoDiv] = useState(true);
+  const [showPasswordDiv, setShowPasswordDiv] = useState(false);
+  const [showDeleteDiv, setShowDeleteDiv] = useState(false);
 
   return (
     <>
-        <div className='NavBar'>
-            <NavBar 
-                width={'100%'}
-                overrides={{
-                    Button36563453: { onClick: () => {dashClick()}},
-                    Button36472923: { onClick: () => setShowAddModal(true)},
-                    Button36562808: { onMouseEnter: () => setShowAccountDrop(true) }
-                }}
-            />
-            <div className='accountSettings'>
-            <button onClick={() => {setShowPasswordModal(true);}} >
-                    Change Password
-                </button>
-                <button onClick={() => {setShowDeleteModal(true);}} >
-                    Delete Account
-                </button>
-            <div className='modal' style={{display: showPasswordModal === false && 'none'}}>
-                <Card>
-                    <AccountSettings.ChangePassword onSuccess={handleSuccessPassword}/>
-                </Card>
-            </div>
-            <div className='modal' style={{display: showDeleteModal === false && 'none'}}>
-                <Card>
-                    <AccountSettings.DeleteUser onSuccess={handleSuccessUser}/>
-                </Card>
-            </div>
-        </div>
-        </div>
-
-        <div className='accountDropModal' style={{ display: showAccountDrop === false && 'none' }}>
-            <AccountDropDown backgroundColor={'transparent'}
-                overrides={{
-                    AccountDropDown: {
-                        onMouseLeave: () => {
-                            setShowAccountDrop(false)
-                    }
-                    },
-                    Button: {
-                        as: 'button',
-                        onMouseEnter: () => {
-                            setShowAccountDrop(true)
-                        },
-                        onMouseLeave: () => {
-                            setShowAccountDrop(false)
-                        }
-                    },
-                    Button36663073: {
-                        onClick: async () => {
-                            signOut()
-                        }
-                    }
-                }}
-            /> 
-        </div>
-        <div className='modal' style={{ display: showAddModal === false && 'none' }}>
-        <AddMedForm 
-          overrides={{ 
-            Icon: {
+      <div className='accountSettings'>
+        <AccountPage
+          overrides={{
+            MyInfoButton: {
               as: 'button',
-              onClick: () => setShowAddModal(false)
+              onClick: () => {
+                setShowMyInfoDiv(true)
+                setShowPasswordDiv(false)
+                setShowDeleteDiv(false)
+              }
+            },
+            ChangePasswordButton: {
+              as: 'button',
+              onClick: () => {
+                setShowMyInfoDiv(false)
+                setShowPasswordDiv(true)
+                setShowDeleteDiv(false)
+              }
+            },
+            DeleteAccountButton: {
+              as: 'button',
+              onClick: () => {
+                setShowMyInfoDiv(false)
+                setShowPasswordDiv(false)
+                setShowDeleteDiv(true)
+              }
             }
           }}
         />
+        <div className='accountMain'>
+          <div className='changePasswordDiv' style={{display: showPasswordDiv === false && 'none'}}>
+            <Card>
+              <AccountSettings.ChangePassword onSuccess={handleSuccessPassword} />
+            </Card>
+          </div>
+          <div className='deleteAccountDiv' style={{display: showDeleteDiv === false && 'none'}}>
+            <Card>
+                <AccountSettings.DeleteUser onSuccess={handleSuccessUser} />
+                <br />
+                <text>WARNING: This will permanently delete your account from the system.</text>
+            </Card>
+          </div>
+          <div className='myInfoDiv' style={{display: showMyInfoDiv === false && 'none'}}>
+              <MyInfo
+              overrides={{
+                EmailInsert: {
+                  children: `${authAttributes["email"]}`
+                },
+                PhoneInsert: {
+                  children: `${authAttributes["phone_number"]}`
+                },
+                FirstNameInsert: {
+                  children: `${authAttributes["given_name"]}`
+                },
+                LastNameInsert: {
+                  children: `${authAttributes["family_name"]}`
+                }
+              }}
+              />
+          </div>
+        </div>
       </div>
     </>
     

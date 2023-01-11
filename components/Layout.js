@@ -1,104 +1,112 @@
+import * as React from "react";
 
-import { NavBar, AddMedForm, UpdateMedForm, AccountDropDown } from '../ui-components';
+import NavBarSaved from './NavBarSaved'
+import Footer from './Footer'
+import { AddMedForm } from '../ui-components';
+import { Medication } from '../models';
 import { useState } from 'react';
 
-import { withAuthenticator } from '@aws-amplify/ui-react';
 import { Auth } from 'aws-amplify';
 import { useRouter } from 'next/router';
 
-function Layout ({ signOut }) {
-
+export default function Layout({ children }) {
+  const [signedIn, setSignedIn] = useState(false)
   const router = useRouter()
-
   const dashClick = () => {
     router.push('/dashboard');
   }
-
   const accountClick = () => {
     router.push('/account');
   }
-
-  const user = Auth.currentUserInfo({
+  const signInClick = () => {
+    router.push('/sign-in');
+  }
+  const id = Auth.currentUserInfo({
     bypassCache: false // Optional, By default is false. If set to true, this call will send a request to Cognito to get the latest user data
   })
-    .then((user) => { 
-      return user;
+  .then((user) => { 
+    return user.id;
+  })
+  .catch((err) => console.log(err));
+  
+  const yoink = () => {
+    id.then((a) => {
+      if (a === undefined) {
+        setSignedIn(false)
+      }
+      else {
+        setSignedIn(true)
+      }
     })
-    .catch((err) => console.log(err));
+  }
+  yoink()
+  const [showAddModal, setShowAddModal] = useState(false);
+  const [showAccountDrop, setShowAccountDrop] = useState(false);
 
-    const [showAddModal, setShowAddModal] = useState(false)
-    const [showUpdateModal, setShowUpdateModal] = useState(false)
-    const [showAccountDrop, setShowAccountDrop] = useState(false)
-    const [updateMed, setUpdateMed] = useState()
+  console.log(signedIn)
 
   return (
     <>
-        <div className='NavBar'>
-            <NavBar 
-                width={'100%'}
-                overrides={{
-                    Button36563453: { onClick: () => {dashClick()}},
-                    Button36562808: { onMouseEnter: () => setShowAccountDrop(true) },
-                    Button36472923: { onClick: () => setShowAddModal(true)},
-                }}
-            />
-        </div>
-        <div className='accountDropModal' style={{ display: showAccountDrop === false && 'none' }}>
-            <AccountDropDown backgroundColor={'transparent'}
-                overrides={{
-                    AccountDropDown: {
-                        onMouseLeave: () => {
-                            setShowAccountDrop(false)
-                    }
-                    },
-                    Button: {
-                        as: 'button',
-                        onMouseEnter: () => {
-                            setShowAccountDrop(true)
-                        },
-                        onMouseLeave: () => {
-                            setShowAccountDrop(false)
-                        }
-                    },
-                    Button36663070: {
-                        onClick: async () => {
-                          accountClick()
-                        }
-                    },
-                    Button36663073: {
-                        onClick: async () => {
-                            signOut()
-                        }
-                    }
-                }}
-            /> 
-        </div>
+    <div className='content-container'>
+      <NavBarSaved
+        overrides={{
+          MedTrak: {
+            as: 'button',
+            onClick: () => {dashClick()}
+          },
+          Button36563453: {
+            as: 'button',
+            onClick: () => {dashClick()},
+            display: signedIn === false && 'none'
+          },
+          Button36472923: {
+            as: 'button',
+            onClick: () => setShowAddModal(true),
+            display: signedIn === false && 'none'
+          },
+          Divider: {
+            display: signedIn === false && 'none'
+          },
+          Button36562808: {
+            onClick: () => setShowAccountDrop(true),
+            display: signedIn === false && 'none'
+          },
+          DropFrame: {
+            display: showAccountDrop === false && 'none',
+            onMouseLeave: () => setShowAccountDrop(false)
+          },
+          AccountButton: {
+            as: 'button',
+            onClick: () => {accountClick()}
+          },
+          SignOutButton: {
+            as: 'button',
+            onClick: async () => {
+              Auth.signOut()
+              setSignedIn(false && 'none')
+            }
+          },
+          SignInButton: {
+            as: 'button',
+            onClick: () => {signInClick()},
+            display: signedIn === true && 'none'
+          }
+        }}
+        />
+        <main>{children}</main>
         <div className='modal' style={{ display: showAddModal === false && 'none' }}>
-        <AddMedForm 
-          overrides={{ 
-            Icon: {
-              as: 'button',
-              onClick: () => setShowAddModal(false)
-            }
-          }}
-        />
-      </div>
-      <div className='modal' style={{ display: showUpdateModal === false && 'none' }}>
-
-        <UpdateMedForm
-          {...Button => (this.btn = Button)}
-          medication={updateMed}
-          overrides={{
-            Icon: {
-              as: 'button',
-              onClick: () => setShowUpdateModal(false)
-            }
-          }}
-        />
-      </div>
+          <AddMedForm 
+            overrides={{ 
+              Icon: {
+                as: 'button',
+                onClick: () => setShowAddModal(false)
+              }
+            }}
+          />
+        </div>
+    </div>
+      <Footer className='footer--pin' height='72px'/>
     </>
-    
-  );
+  )
 }
 
-export default withAuthenticator(Layout);

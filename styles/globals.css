@@ -17,8 +17,8 @@ code {
     monospace;
 }
 
-.amplify-button--link {
-  font-weight: normal;
+.content-container {
+  min-height: calc(100vh - 72px);
 }
 
 .MedCollectionContainer {
@@ -38,11 +38,6 @@ code {
   border: .5px solid gray;
 }
 
-.NavBar {
-  width: 100%;
-  position: absolute;
-}
-
 .accountDropModal {
   padding-left: calc(100% - 220px);
   z-index: 9;
@@ -50,6 +45,13 @@ code {
   right: 0;
   padding-top: 50px;
   background-color: transparent;
+}
+
+.dropbox {
+  display: flex;
+  align-self: stretch;
+  justify-content: center;
+  z-index:auto;
 }
 
 .center {
@@ -63,7 +65,39 @@ code {
 
 .accountSettings {
   margin: 0;
-  position: relative;
-  padding-top: 10%;
-  left: 5%;
+  justify-content:flex-start;
+  display: flex;
+  flex-direction: row;
+  width: auto;
+  height: auto;
+  background-color: transparent;
+}
+
+.accountMain {
+  background-color: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: calc(100vh - 146px);
+  width:85%;
+  border: 2px;
+  border-color: orangered;
+}
+
+.changePasswordDiv {
+  width: 35%;
+  height: 50%;
+}
+
+.deleteAccountDiv {
+  width: auto;
+  height: 25%;
+  gap: 10px;
+}
+
+.myInfoDiv {
+  width: inherit;
+  height: 50%;
+  background-color: transparent;
+  padding: 0px;
 }

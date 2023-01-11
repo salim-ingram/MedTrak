@@ -49,47 +49,6 @@ function Dashboard ({ signOut }) {
 
   return (
     <>
-        <div className='NavBar'>
-          <NavBar 
-            width={'100%'}
-            overrides={{
-              Button36563453: { onClick: () => {dashClick()}},
-              Button36472923: { onClick: () => setShowAddModal(true)},
-              Button36562808: { onMouseEnter: () => setShowAccountDrop(true) }
-            }}
-          />
-        </div>
-          <div className='accountDropModal' style={{ display: showAccountDrop === false && 'none' }}>
-              <AccountDropDown backgroundColor={'transparent'}
-                overrides={{
-                  AccountDropDown: {
-                    onMouseLeave: () => {
-                      setShowAccountDrop(false)
-                    }
-                  },
-                  Button: {
-                    as: 'button',
-                    onMouseEnter: () => {
-                      setShowAccountDrop(true)
-                    },
-                    onMouseLeave: () => {
-                      setShowAccountDrop(false)
-                    }
-                  },
-                  Button36663073: {
-                    onClick: async () => {
-                      signOut()
-                    }
-                  },
-                  Button36663070: {
-                    onClick: async () => {
-                      accountClick()
-                    }
-                  }
-                }}
-              /> 
-          </div>
-
       <div className='center'>
         <div className='MedCollectionContainer'>
         <MedCardCollection overrideItems={({ item, idx }) => {
