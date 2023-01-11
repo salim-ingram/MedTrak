@@ -41,9 +41,10 @@ export default function NavBar(props) {
           position="relative"
           padding="0px 0px 0px 0px"
           whiteSpace="pre-wrap"
-          children="Developed by Salim Ingram"
           {...getOverrideProps(overrides, "DevBy")}
-        ></Text>
+        >
+          Developed by Salim Ingram
+        </Text>
     </Flex>
   );
 }

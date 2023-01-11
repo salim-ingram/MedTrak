@@ -40,9 +40,10 @@ export default function AccountPage(props) {
           position="relative"
           padding="0px 0px 0px 0px"
           whiteSpace="pre-wrap"
-          children="Your Account"
           {...getOverrideProps(overrides, "YourAccount")}
-        ></Text>
+        >
+          Your Account
+        </Text>
         <Flex
             className="listFlex"
             gap="25px"
@@ -62,9 +63,10 @@ export default function AccountPage(props) {
                 variation="link"
                 fontWeight='normal'
                 padding='0px 8px 0px 8px'
-                children="My Information"
                 {...getOverrideProps(overrides, "MyInfoButton")}
-            ></Button>
+            >
+              My Information
+            </Button>
             <Button
                 shrink="0"
                 size="normal"
@@ -72,9 +74,10 @@ export default function AccountPage(props) {
                 variation="link"
                 fontWeight='normal'
                 padding='0px 8px 0px 8px'
-                children="Change Password"
                 {...getOverrideProps(overrides, "ChangePasswordButton")}
-            ></Button>
+            >
+              Change Password
+            </Button>
             <Button
                 shrink="0"
                 size="normal"
@@ -82,9 +85,10 @@ export default function AccountPage(props) {
                 variation="link"
                 fontWeight='normal'
                 padding='0px 8px 0px 8px'
-                children="Delete Account"
                 {...getOverrideProps(overrides, "DeleteAccountButton")}
-            ></Button>
+            >
+              Delete Account
+            </Button>
         </Flex>
     </Flex>
   );

@@ -58,9 +58,10 @@ export default function MyInfo(props) {
                 position="relative"
                 padding="0px 0px 0px 0px"
                 whiteSpace="pre-wrap"
-                children="Email:"
                 {...getOverrideProps(overrides, "Email")}
-            ></Text>
+            >
+                Email:
+            </Text>
                         <Text
                 fontFamily="Inter"
                 fontSize="16px"
@@ -83,9 +84,9 @@ export default function MyInfo(props) {
                 position="relative"
                 padding="0px 0px 0px 0px"
                 whiteSpace="pre-wrap"
-                children="blank"
                 {...getOverrideProps(overrides, "EmailInsert")}
-            ></Text>
+            >
+            </Text>
         </Flex>
         <Flex
             gap="20px"
@@ -120,9 +121,10 @@ export default function MyInfo(props) {
                 position="relative"
                 padding="0px 0px 0px 0px"
                 whiteSpace="pre-wrap"
-                children="Phone:"
                 {...getOverrideProps(overrides, "Phone")}
-            ></Text>
+            >
+                Phone:
+            </Text>
             <Text
                 fontFamily="Inter"
                 fontSize="16px"
@@ -182,9 +184,10 @@ export default function MyInfo(props) {
                 position="relative"
                 padding="0px 0px 0px 0px"
                 whiteSpace='nowrap'
-                children="First Name:"
                 {...getOverrideProps(overrides, "FirstName")}
-            ></Text>
+            >
+                First Name:
+            </Text>
             <Text
                 fontFamily="Inter"
                 fontSize="16px"
@@ -207,7 +210,6 @@ export default function MyInfo(props) {
                 position="relative"
                 padding="0px 0px 0px 0px"
                 whiteSpace="pre-wrap"
-                children="blank"
                 {...getOverrideProps(overrides, "FirstNameInsert")}
             ></Text>
         </Flex>
@@ -244,9 +246,10 @@ export default function MyInfo(props) {
                 position="relative"
                 padding="0px 0px 0px 0px"
                 whiteSpace='nowrap'
-                children="Last Name:"
                 {...getOverrideProps(overrides, "LastName")}
-            ></Text>
+            >
+                Last Name:
+            </Text>
             <Text
                 fontFamily="Inter"
                 fontSize="16px"
@@ -269,7 +272,6 @@ export default function MyInfo(props) {
                 position="relative"
                 padding="0px 0px 0px 0px"
                 whiteSpace="pre-wrap"
-                children="blank"
                 {...getOverrideProps(overrides, "LastNameInsert")}
             ></Text>
         </Flex>

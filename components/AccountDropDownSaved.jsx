@@ -49,9 +49,10 @@ export default function AccountDropDown(props) {
             size="small"
             isDisabled={false}
             variation="link"
-            children="Account"
             {...getOverrideProps(overrides, "Button36663070")}
-          ></Button>
+          >
+            Account
+          </Button>
         </Flex>
         <Flex
           gap="0"
@@ -71,9 +72,10 @@ export default function AccountDropDown(props) {
             size="small"
             isDisabled={false}
             variation="link"
-            children="Sign Out"
             {...getOverrideProps(overrides, "Button36663073")}
-          ></Button>
+          >
+            Sign Out
+          </Button>
         </Flex>
       </Flex>
     </Flex>

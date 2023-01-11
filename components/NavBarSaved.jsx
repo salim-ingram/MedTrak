@@ -54,9 +54,10 @@ export default function NavBar(props) {
           position="relative"
           padding="0px 0px 0px 0px"
           whiteSpace="pre-wrap"
-          children="MedTrak"
           {...getOverrideProps(overrides, "MedTrak")}
-        ></Text>
+        >
+          MedTrak
+        </Text>
       </Flex>
       <Flex
         gap="30px"
@@ -80,11 +81,12 @@ export default function NavBar(props) {
           justifyContent="center"
           isDisabled={false}
           variation="link"
-          children="Dashboard"
           fontWeight='normal'
           padding='0px 8px 0px 8px'
           {...getOverrideProps(overrides, "Button36563453")}
-        ></Button>
+        >
+          Dashboard
+        </Button>
       </Flex>
       <Flex
         gap="0"
@@ -116,11 +118,12 @@ export default function NavBar(props) {
             size='normal'
             isDisabled={false}
             variation="link"
-            children="Add Medication"
             fontWeight='normal'
             padding='0px 8px 0px 8px'
             {...getOverrideProps(overrides, "Button36472923")}
-          ></Button>
+          >
+            Add Medication
+          </Button>
         </Flex>
         <Flex
           gap="0"
@@ -162,13 +165,14 @@ export default function NavBar(props) {
             size='normal'
             isDisabled={false}
             variation="link"
-            children={`${authAttributes["given_name"]}${" "}${
-              authAttributes["family_name"]
-            }`}
             fontWeight='normal'
             padding='0px 9px 0px 8px'
             {...getOverrideProps(overrides, "Button36562808")}
-          ></Button>
+          >
+            {authAttributes["given_name"]}{" "}{
+              authAttributes["family_name"]
+            }
+          </Button>
           <Flex
             gap="0px"
             direction="column"
@@ -198,10 +202,11 @@ export default function NavBar(props) {
                 size="normal"
                 isDisabled={false}
                 variation="link"
-                children='Account'
                 fontWeight='normal'
                 {...getOverrideProps(overrides, "AccountButton")}
-              ></Button>
+              >
+                Account
+              </Button>
               <Button
                 className="dropdownButton"
                 shrink="0"
@@ -209,10 +214,12 @@ export default function NavBar(props) {
                 size="normal"
                 isDisabled={false}
                 variation="link"
-                children='SignOut'
                 fontWeight='normal'
+                whiteSpace='nowrap'
                 {...getOverrideProps(overrides, "SignOutButton")}
-              ></Button>
+              >
+                Sign Out
+              </Button>
             </Flex>
           </Flex>
         </Flex>
@@ -222,10 +229,9 @@ export default function NavBar(props) {
             size='normal'
             isDisabled={false}
             variation="link"
-            children='Sign In'
             fontWeight='normal'
             {...getOverrideProps(overrides, "SignInButton")}
-          ></Button>
+          >Sign In</Button>
       </Flex>
     </Flex>
   );
