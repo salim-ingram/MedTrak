@@ -18,7 +18,7 @@ export default function MedCard(props) {
     <Flex
       gap="0"
       direction="column"
-      width="auto"
+      width="max-content"
       height="unset"
       justifyContent="flex-end"
       alignItems="center"
@@ -32,10 +32,10 @@ export default function MedCard(props) {
       <Flex
         gap="1px"
         direction="row"
-        width='auto'
+        width='max-width'
         height="unset"
-        justifyContent="space-between"
-        alignItems="flex-start"
+        justifyContent='center'
+        alignItems='stretch'
         shrink="0"
         position="relative"
         padding="20px 15px 0px 20px"
@@ -79,6 +79,13 @@ export default function MedCard(props) {
             {...getOverrideProps(overrides, "Vector36532867")}
           ></Icon>
         </Link>
+        <Flex
+        width='relative.xxxl'
+        paddingRight='75%'
+        paddingLeft='75%'
+        >
+
+        </Flex>
         <Link
           padding="0px 0px 0px 0px"
           width="14px"
