@@ -116,7 +116,7 @@ export default function Layout({ children }) {
           />
         </div>
       </div>
-      <Footer className='footer--pin' height='72px' />
+      <Footer className='footer--pin' height='72px' padding-bottom='15%'/>
     </>
   )
 }

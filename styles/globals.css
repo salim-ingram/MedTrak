@@ -17,8 +17,37 @@ code {
     monospace;
 }
 
+h6 {
+  font-family: 'Inter';
+  font-size: 36px;
+  font-weight: 600;
+  text-transform: capitalize;
+  line-height: 24.204544067382812px;
+  text-align: left;
+  display: block;
+  direction: column;
+  justify-content: center;
+  width: unset;
+  height: unset;
+  gap: unset;
+  align-items: unset;
+  position: relative;
+  padding: 0px 0px 0px 0px;
+  white-space: pre-wrap;
+  background: -webkit-linear-gradient(#F07953, #8EC2F3);
+  -webkit-background-clip: text;
+  background-clip: border-box;
+  -webkit-text-fill-color: transparent;
+}
+
 .content-container {
   min-height: calc(100vh - 72px);
+}
+
+.footer--pin {
+  position: relative;
+  left: 0;
+  bottom: 0;
 }
 
 .MedCollectionContainer {
@@ -68,7 +97,7 @@ code {
   display: flex;
   flex-direction: row;
   width: auto;
-  height: auto;
+  height: calc(100vh - 152px);
   background-color: transparent;
 }
 

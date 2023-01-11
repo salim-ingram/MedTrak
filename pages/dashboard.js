@@ -1,5 +1,6 @@
 
-import { MedicationUpdateForm, MedCardCollection } from '../ui-components';
+import { MedicationUpdateForm } from '../ui-components';
+import MedCardCollection from '../components/MedCardCollectionSaved'
 import { DataStore } from '@aws-amplify/datastore';
 import { Medication } from '../models';
 import { useState } from 'react';

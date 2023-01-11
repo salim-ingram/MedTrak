@@ -1,6 +1,6 @@
 import * as React from "react";
 import { getOverrideProps, useAuth } from "@aws-amplify/ui-react/internal";
-import { Button, Divider, Flex, Text } from "@aws-amplify/ui-react";
+import { Divider, Flex, Link } from "@aws-amplify/ui-react";
 
 export default function NavBar(props) {
   const { firstName, lastName, handleAuth, authText, overrides, ...rest } =
@@ -29,24 +29,22 @@ export default function NavBar(props) {
         alignItems="center"
         shrink="0"
         position="relative"
-        padding="0px 0px 0px 0px"
+        padding="0px 10px 0px 10px"
         {...getOverrideProps(overrides, "Logo")}
       >
-        <Text
+        <Link
           fontFamily="Inter"
-          fontSize="24px"
+          fontSize="36px"
+          color='#FF5C00'
           fontWeight="600"
-          color="rgba(0,0,0,1)"
           textTransform="capitalize"
           lineHeight="24.204544067382812px"
           textAlign="left"
           display="block"
           direction="column"
           justifyContent='center'
-          width="unset"
-          height="unset"
-          gap="unset"
-          alignItems="unset"
+          width='auto'
+          height="auto"
           grow="1"
           shrink="1"
           basis="0"
@@ -57,7 +55,7 @@ export default function NavBar(props) {
           {...getOverrideProps(overrides, "MedTrak")}
         >
           MedTrak
-        </Text>
+        </Link>
       </Flex>
       <Flex
         gap="30px"
@@ -73,7 +71,7 @@ export default function NavBar(props) {
         padding="0px 0px 0px 0px"
         {...getOverrideProps(overrides, "Frame 32129767076")}
       >
-        <Button
+        <Link
           shrink="0"
           alignSelf="stretch"
           width='auto'
@@ -83,10 +81,11 @@ export default function NavBar(props) {
           variation="link"
           fontWeight='normal'
           padding='0px 8px 0px 8px'
+          fontSize='18px'
           {...getOverrideProps(overrides, "Button36563453")}
         >
           Dashboard
-        </Button>
+        </Link>
       </Flex>
       <Flex
         gap="0"
@@ -112,7 +111,7 @@ export default function NavBar(props) {
           padding="0px 0px 0px 0px"
           {...getOverrideProps(overrides, "Frame 32236562816")}
         >
-          <Button
+          <Link
             shrink="0"
             alignSelf="stretch"
             size='normal'
@@ -120,16 +119,17 @@ export default function NavBar(props) {
             variation="link"
             fontWeight='normal'
             padding='0px 8px 0px 8px'
+            fontSize='18px'
             {...getOverrideProps(overrides, "Button36472923")}
           >
             Add Medication
-          </Button>
+          </Link>
         </Flex>
         <Flex
           gap="0"
           direction="row"
           width='large'
-          height='large'
+          height='30px'
           justifyContent="center"
           alignItems="center"
           shrink="0"
@@ -142,7 +142,7 @@ export default function NavBar(props) {
             width='2px'
             shrink="0"
             alignSelf="stretch"
-            size="small"
+            size="normal"
             orientation='vertical'
             {...getOverrideProps(overrides, "Divider")}
           ></Divider>
@@ -159,7 +159,7 @@ export default function NavBar(props) {
           padding="0px 0px 0px 0px"
           {...getOverrideProps(overrides, "Frame 32129767081")}
         >
-          <Button
+          <Link
             shrink="0"
             alignSelf="stretch"
             size='normal'
@@ -167,14 +167,15 @@ export default function NavBar(props) {
             variation="link"
             fontWeight='normal'
             padding='0px 9px 0px 8px'
+            fontSize='18px'
             {...getOverrideProps(overrides, "Button36562808")}
           >
             {authAttributes["given_name"]}{" "}{
               authAttributes["family_name"]
             }
-          </Button>
+          </Link>
           <Flex
-            gap="0px"
+            gap="20px"
             direction="column"
             width="auto"
             height="unset"
@@ -187,7 +188,7 @@ export default function NavBar(props) {
             {...getOverrideProps(overrides, "DropFrame")}
             >
               <Flex
-              gap="0px"
+              gap="10px"
               direction="column"
               width="auto"
               height='min-content'
@@ -196,18 +197,19 @@ export default function NavBar(props) {
               padding="5px 30px 30px 30px"
               z-index='9'
               {...getOverrideProps(overrides, "DropDownContents")}>
-              <Button
+              <Link
                 shrink="0"
                 alignSelf="stretch"
                 size="normal"
                 isDisabled={false}
                 variation="link"
                 fontWeight='normal'
+                fontSize='18px'
                 {...getOverrideProps(overrides, "AccountButton")}
               >
                 Account
-              </Button>
-              <Button
+              </Link>
+              <Link
                 className="dropdownButton"
                 shrink="0"
                 alignSelf="stretch"
@@ -216,22 +218,26 @@ export default function NavBar(props) {
                 variation="link"
                 fontWeight='normal'
                 whiteSpace='nowrap'
+                fontSize='18px'
                 {...getOverrideProps(overrides, "SignOutButton")}
               >
                 Sign Out
-              </Button>
+              </Link>
             </Flex>
           </Flex>
         </Flex>
-        <Button
+        <Link
             shrink="0"
             alignSelf="stretch"
             size='normal'
             isDisabled={false}
             variation="link"
             fontWeight='normal'
+            fontSize='18px'
             {...getOverrideProps(overrides, "SignInButton")}
-          >Sign In</Button>
+        >
+          Sign In
+        </Link>
       </Flex>
     </Flex>
   );
