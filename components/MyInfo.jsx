@@ -147,7 +147,6 @@ export default function MyInfo(props) {
                 position="relative"
                 padding="0px 0px 0px 0px"
                 whiteSpace="nowrap"
-                children="blank"
                 {...getOverrideProps(overrides, "PhoneInsert")}
             ></Text>
         </Flex>
