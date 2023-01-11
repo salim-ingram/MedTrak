@@ -6,13 +6,7 @@
 
 /* eslint-disable */
 import * as React from "react";
-import { Medication } from "../models";
-import {
-  getOverrideProps,
-  useDataStoreCreateAction,
-  useStateMutationAction,
-} from "@aws-amplify/ui-react/internal";
-import { schema } from "../models/schema";
+import { getOverrideProps } from "@aws-amplify/ui-react/internal";
 import {
   Button,
   Divider,
@@ -24,32 +18,6 @@ import {
 } from "@aws-amplify/ui-react";
 export default function AddMedForm(props) {
   const { medication, overrides, ...rest } = props;
-  const [
-    textFieldThreeSixFourSevenTwoEightOneNineValue,
-    setTextFieldThreeSixFourSevenTwoEightOneNineValue,
-  ] = useStateMutationAction("");
-  const [
-    textFieldThreeSixFourSevenTwoEightTwoZeroValue,
-    setTextFieldThreeSixFourSevenTwoEightTwoZeroValue,
-  ] = useStateMutationAction("");
-  const [
-    textFieldThreeSixFourSevenTwoEightTwoOneValue,
-    setTextFieldThreeSixFourSevenTwoEightTwoOneValue,
-  ] = useStateMutationAction("");
-  const [
-    textFieldThreeSixFourSevenTwoEightTwoTwoValue,
-    setTextFieldThreeSixFourSevenTwoEightTwoTwoValue,
-  ] = useStateMutationAction("");
-  const buttonOnClick = useDataStoreCreateAction({
-    fields: {
-      medName: textFieldThreeSixFourSevenTwoEightOneNineValue,
-      medQuantity: textFieldThreeSixFourSevenTwoEightTwoZeroValue,
-      medStrength: textFieldThreeSixFourSevenTwoEightTwoOneValue,
-      dailyDose: textFieldThreeSixFourSevenTwoEightTwoTwoValue,
-    },
-    model: Medication,
-    schema: schema,
-  });
   return (
     <Flex
       gap="16px"
@@ -179,12 +147,6 @@ export default function AddMedForm(props) {
             isDisabled={false}
             labelHidden={false}
             variation="default"
-            value={textFieldThreeSixFourSevenTwoEightOneNineValue}
-            onChange={(event) => {
-              setTextFieldThreeSixFourSevenTwoEightOneNineValue(
-                event.target.value
-              );
-            }}
             {...getOverrideProps(overrides, "TextField36472819")}
           ></TextField>
           <TextField
@@ -197,12 +159,6 @@ export default function AddMedForm(props) {
             isDisabled={false}
             labelHidden={false}
             variation="default"
-            value={textFieldThreeSixFourSevenTwoEightTwoZeroValue}
-            onChange={(event) => {
-              setTextFieldThreeSixFourSevenTwoEightTwoZeroValue(
-                event.target.value
-              );
-            }}
             {...getOverrideProps(overrides, "TextField36472820")}
           ></TextField>
           <TextField
@@ -215,12 +171,6 @@ export default function AddMedForm(props) {
             isDisabled={false}
             labelHidden={false}
             variation="default"
-            value={textFieldThreeSixFourSevenTwoEightTwoOneValue}
-            onChange={(event) => {
-              setTextFieldThreeSixFourSevenTwoEightTwoOneValue(
-                event.target.value
-              );
-            }}
             {...getOverrideProps(overrides, "TextField36472821")}
           ></TextField>
           <TextField
@@ -233,12 +183,6 @@ export default function AddMedForm(props) {
             isDisabled={false}
             labelHidden={false}
             variation="default"
-            value={textFieldThreeSixFourSevenTwoEightTwoTwoValue}
-            onChange={(event) => {
-              setTextFieldThreeSixFourSevenTwoEightTwoTwoValue(
-                event.target.value
-              );
-            }}
             {...getOverrideProps(overrides, "TextField36472822")}
           ></TextField>
         </Flex>
@@ -256,9 +200,6 @@ export default function AddMedForm(props) {
           isDisabled={false}
           variation="primary"
           children="Save"
-          onClick={() => {
-            buttonOnClick();
-          }}
           {...getOverrideProps(overrides, "Button")}
         ></Button>
       </Flex>

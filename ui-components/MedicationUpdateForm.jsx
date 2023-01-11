@@ -18,23 +18,20 @@ export default function MedicationUpdateForm(props) {
     onSuccess,
     onError,
     onSubmit,
+    onCancel,
     onValidate,
     onChange,
     overrides,
     ...rest
   } = props;
   const initialValues = {
-    medName: "",
     medQuantity: "",
-    daysLeft: "",
     medStrength: "",
     dailyDose: "",
   };
-  const [medName, setMedName] = React.useState(initialValues.medName);
   const [medQuantity, setMedQuantity] = React.useState(
     initialValues.medQuantity
   );
-  const [daysLeft, setDaysLeft] = React.useState(initialValues.daysLeft);
   const [medStrength, setMedStrength] = React.useState(
     initialValues.medStrength
   );
@@ -44,9 +41,7 @@ export default function MedicationUpdateForm(props) {
     const cleanValues = medicationRecord
       ? { ...initialValues, ...medicationRecord }
       : initialValues;
-    setMedName(cleanValues.medName);
     setMedQuantity(cleanValues.medQuantity);
-    setDaysLeft(cleanValues.daysLeft);
     setMedStrength(cleanValues.medStrength);
     setDailyDose(cleanValues.dailyDose);
     setErrors({});
@@ -63,9 +58,7 @@ export default function MedicationUpdateForm(props) {
   }, [idProp, medication]);
   React.useEffect(resetStateValues, [medicationRecord]);
   const validations = {
-    medName: [],
     medQuantity: [],
-    daysLeft: [],
     medStrength: [],
     dailyDose: [],
   };
@@ -94,9 +87,7 @@ export default function MedicationUpdateForm(props) {
       onSubmit={async (event) => {
         event.preventDefault();
         let modelFields = {
-          medName,
           medQuantity,
-          daysLeft,
           medStrength,
           dailyDose,
         };
@@ -146,37 +137,10 @@ export default function MedicationUpdateForm(props) {
       {...rest}
     >
       <TextField
-        label="Med name"
+        label="New quantity"
         isRequired={false}
         isReadOnly={false}
-        value={medName}
-        onChange={(e) => {
-          let { value } = e.target;
-          if (onChange) {
-            const modelFields = {
-              medName: value,
-              medQuantity,
-              daysLeft,
-              medStrength,
-              dailyDose,
-            };
-            const result = onChange(modelFields);
-            value = result?.medName ?? value;
-          }
-          if (errors.medName?.hasError) {
-            runValidationTasks("medName", value);
-          }
-          setMedName(value);
-        }}
-        onBlur={() => runValidationTasks("medName", medName)}
-        errorMessage={errors.medName?.errorMessage}
-        hasError={errors.medName?.hasError}
-        {...getOverrideProps(overrides, "medName")}
-      ></TextField>
-      <TextField
-        label="Med quantity"
-        isRequired={false}
-        isReadOnly={false}
+        placeholder="eg. 30"
         type="number"
         step="any"
         value={medQuantity}
@@ -186,9 +150,7 @@ export default function MedicationUpdateForm(props) {
             : parseInt(e.target.value);
           if (onChange) {
             const modelFields = {
-              medName,
               medQuantity: value,
-              daysLeft,
               medStrength,
               dailyDose,
             };
@@ -206,41 +168,10 @@ export default function MedicationUpdateForm(props) {
         {...getOverrideProps(overrides, "medQuantity")}
       ></TextField>
       <TextField
-        label="Days left"
+        label="New strength (mg)"
         isRequired={false}
         isReadOnly={false}
-        type="number"
-        step="any"
-        value={daysLeft}
-        onChange={(e) => {
-          let value = isNaN(parseInt(e.target.value))
-            ? e.target.value
-            : parseInt(e.target.value);
-          if (onChange) {
-            const modelFields = {
-              medName,
-              medQuantity,
-              daysLeft: value,
-              medStrength,
-              dailyDose,
-            };
-            const result = onChange(modelFields);
-            value = result?.daysLeft ?? value;
-          }
-          if (errors.daysLeft?.hasError) {
-            runValidationTasks("daysLeft", value);
-          }
-          setDaysLeft(value);
-        }}
-        onBlur={() => runValidationTasks("daysLeft", daysLeft)}
-        errorMessage={errors.daysLeft?.errorMessage}
-        hasError={errors.daysLeft?.hasError}
-        {...getOverrideProps(overrides, "daysLeft")}
-      ></TextField>
-      <TextField
-        label="Med strength"
-        isRequired={false}
-        isReadOnly={false}
+        placeholder="eg. 30"
         type="number"
         step="any"
         value={medStrength}
@@ -250,9 +181,7 @@ export default function MedicationUpdateForm(props) {
             : parseInt(e.target.value);
           if (onChange) {
             const modelFields = {
-              medName,
               medQuantity,
-              daysLeft,
               medStrength: value,
               dailyDose,
             };
@@ -270,9 +199,10 @@ export default function MedicationUpdateForm(props) {
         {...getOverrideProps(overrides, "medStrength")}
       ></TextField>
       <TextField
-        label="Daily dose"
+        label="New daily dose"
         isRequired={false}
         isReadOnly={false}
+        placeholder="eg. 1"
         type="number"
         step="any"
         value={dailyDose}
@@ -282,9 +212,7 @@ export default function MedicationUpdateForm(props) {
             : parseInt(e.target.value);
           if (onChange) {
             const modelFields = {
-              medName,
               medQuantity,
-              daysLeft,
               medStrength,
               dailyDose: value,
             };
@@ -306,7 +234,7 @@ export default function MedicationUpdateForm(props) {
         {...getOverrideProps(overrides, "CTAFlex")}
       >
         <Button
-          children="Reset"
+          children="Clear"
           type="reset"
           onClick={(event) => {
             event.preventDefault();
@@ -320,7 +248,15 @@ export default function MedicationUpdateForm(props) {
           {...getOverrideProps(overrides, "RightAlignCTASubFlex")}
         >
           <Button
-            children="Submit"
+            children="Cancel"
+            type="button"
+            onClick={() => {
+              onCancel && onCancel();
+            }}
+            {...getOverrideProps(overrides, "CancelButton")}
+          ></Button>
+          <Button
+            children="Update"
             type="submit"
             variation="primary"
             isDisabled={

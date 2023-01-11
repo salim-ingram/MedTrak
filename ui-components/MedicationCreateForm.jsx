@@ -17,6 +17,7 @@ export default function MedicationCreateForm(props) {
     onSuccess,
     onError,
     onSubmit,
+    onCancel,
     onValidate,
     onChange,
     overrides,
@@ -25,7 +26,6 @@ export default function MedicationCreateForm(props) {
   const initialValues = {
     medName: "",
     medQuantity: "",
-    daysLeft: "",
     medStrength: "",
     dailyDose: "",
   };
@@ -33,7 +33,6 @@ export default function MedicationCreateForm(props) {
   const [medQuantity, setMedQuantity] = React.useState(
     initialValues.medQuantity
   );
-  const [daysLeft, setDaysLeft] = React.useState(initialValues.daysLeft);
   const [medStrength, setMedStrength] = React.useState(
     initialValues.medStrength
   );
@@ -42,7 +41,6 @@ export default function MedicationCreateForm(props) {
   const resetStateValues = () => {
     setMedName(initialValues.medName);
     setMedQuantity(initialValues.medQuantity);
-    setDaysLeft(initialValues.daysLeft);
     setMedStrength(initialValues.medStrength);
     setDailyDose(initialValues.dailyDose);
     setErrors({});
@@ -50,7 +48,6 @@ export default function MedicationCreateForm(props) {
   const validations = {
     medName: [],
     medQuantity: [],
-    daysLeft: [],
     medStrength: [],
     dailyDose: [],
   };
@@ -81,7 +78,6 @@ export default function MedicationCreateForm(props) {
         let modelFields = {
           medName,
           medQuantity,
-          daysLeft,
           medStrength,
           dailyDose,
         };
@@ -130,9 +126,10 @@ export default function MedicationCreateForm(props) {
       {...rest}
     >
       <TextField
-        label="Med name"
+        label="Medication name"
         isRequired={false}
         isReadOnly={false}
+        placeholder="eg. Lexapro"
         value={medName}
         onChange={(e) => {
           let { value } = e.target;
@@ -140,7 +137,6 @@ export default function MedicationCreateForm(props) {
             const modelFields = {
               medName: value,
               medQuantity,
-              daysLeft,
               medStrength,
               dailyDose,
             };
@@ -158,9 +154,10 @@ export default function MedicationCreateForm(props) {
         {...getOverrideProps(overrides, "medName")}
       ></TextField>
       <TextField
-        label="Med quantity"
+        label="Quantity"
         isRequired={false}
         isReadOnly={false}
+        placeholder="eg. 120"
         type="number"
         step="any"
         value={medQuantity}
@@ -172,7 +169,6 @@ export default function MedicationCreateForm(props) {
             const modelFields = {
               medName,
               medQuantity: value,
-              daysLeft,
               medStrength,
               dailyDose,
             };
@@ -190,41 +186,10 @@ export default function MedicationCreateForm(props) {
         {...getOverrideProps(overrides, "medQuantity")}
       ></TextField>
       <TextField
-        label="Days left"
+        label="Strength (mg)"
         isRequired={false}
         isReadOnly={false}
-        type="number"
-        step="any"
-        value={daysLeft}
-        onChange={(e) => {
-          let value = isNaN(parseInt(e.target.value))
-            ? e.target.value
-            : parseInt(e.target.value);
-          if (onChange) {
-            const modelFields = {
-              medName,
-              medQuantity,
-              daysLeft: value,
-              medStrength,
-              dailyDose,
-            };
-            const result = onChange(modelFields);
-            value = result?.daysLeft ?? value;
-          }
-          if (errors.daysLeft?.hasError) {
-            runValidationTasks("daysLeft", value);
-          }
-          setDaysLeft(value);
-        }}
-        onBlur={() => runValidationTasks("daysLeft", daysLeft)}
-        errorMessage={errors.daysLeft?.errorMessage}
-        hasError={errors.daysLeft?.hasError}
-        {...getOverrideProps(overrides, "daysLeft")}
-      ></TextField>
-      <TextField
-        label="Med strength"
-        isRequired={false}
-        isReadOnly={false}
+        placeholder="eg. 20"
         type="number"
         step="any"
         value={medStrength}
@@ -236,7 +201,6 @@ export default function MedicationCreateForm(props) {
             const modelFields = {
               medName,
               medQuantity,
-              daysLeft,
               medStrength: value,
               dailyDose,
             };
@@ -257,6 +221,7 @@ export default function MedicationCreateForm(props) {
         label="Daily dose"
         isRequired={false}
         isReadOnly={false}
+        placeholder="eg. 2"
         type="number"
         step="any"
         value={dailyDose}
@@ -268,7 +233,6 @@ export default function MedicationCreateForm(props) {
             const modelFields = {
               medName,
               medQuantity,
-              daysLeft,
               medStrength,
               dailyDose: value,
             };
@@ -303,7 +267,15 @@ export default function MedicationCreateForm(props) {
           {...getOverrideProps(overrides, "RightAlignCTASubFlex")}
         >
           <Button
-            children="Submit"
+            children="Cancel"
+            type="button"
+            onClick={() => {
+              onCancel && onCancel();
+            }}
+            {...getOverrideProps(overrides, "CancelButton")}
+          ></Button>
+          <Button
+            children="Add"
             type="submit"
             variation="primary"
             isDisabled={Object.values(errors).some((e) => e?.hasError)}

@@ -1,32 +1,14 @@
 
-import { NavBar, MedCardCollection, AddMedForm, UpdateMedForm, AccountDropDown } from '../ui-components';
+import { MedicationUpdateForm, MedCardCollection } from '../ui-components';
 import { DataStore } from '@aws-amplify/datastore';
 import { Medication } from '../models';
 import { useState } from 'react';
 
 import { withAuthenticator } from '@aws-amplify/ui-react';
-import { Auth } from 'aws-amplify';
-import { useRouter } from 'next/router';
 
-function Dashboard ({ signOut }) {
-  const router = useRouter()
-  const dashClick = () => {
-    router.push('/dashboard');
-  }
-  const accountClick = () => {
-    router.push('/account');
-  }
-  const user = Auth.currentUserInfo({
-    bypassCache: false // Optional, By default is false. If set to true, this call will send a request to Cognito to get the latest user data
-  })
-    .then((user) => { 
-      return user;
-    })
-    .catch((err) => console.log(err));
+function Dashboard() {
 
-  const [showAddModal, setShowAddModal] = useState(false)
   const [showUpdateModal, setShowUpdateModal] = useState(false)
-  const [showAccountDrop, setShowAccountDrop] = useState(false)
   const [updateMed, setUpdateMed] = useState()
 
   async function updateQuantity(item) {
@@ -38,67 +20,75 @@ function Dashboard ({ signOut }) {
     );
   }
 
+
+
+
   async function setDays(item) {
+    try {
     const original = await DataStore.query(Medication, item);
     await DataStore.save(
       Medication.copyOf(original, updated => {
         updated.daysLeft = Math.floor((original.medQuantity / original.dailyDose))
       })
     );
+    }
+    catch(e) {console.error(e)}
   }
 
   return (
     <>
       <div className='center'>
         <div className='MedCollectionContainer'>
-        <MedCardCollection overrideItems={({ item, idx }) => {
-          setDays(item)
-        return {
-          overrides: {
-            edit: {
-              as: 'button',
-              onClick: () => {
-                setShowUpdateModal(true)
-                setUpdateMed(item)
+          <MedCardCollection overrideItems={({ item, idx }) => {
+            setDays(item)
+            return {
+              overrides: {
+                edit: {
+                  as: 'button',
+                  onClick: () => {
+                    setShowUpdateModal(true)
+                    setUpdateMed(item)
+                  }
+                },
+                Button: {
+                  as: 'button',
+                  onClick: async () => {
+                    updateQuantity(item)
+                  }
+                }
               }
-            },
-            Button: {
-              as: 'button',
-              onClick: async () => {
-                updateQuantity(item)
-            }
-            }
-          }
-        }
-      }}
-      />
-        </div>
-      </div>
-      <div className='modal' style={{ display: showAddModal === false && 'none' }}>
-        <AddMedForm 
-          overrides={{ 
-            Icon: {
-              as: 'button',
-              onClick: () => setShowAddModal(false)
             }
           }}
-        />
+          />
+        </div>
       </div>
       <div className='modal' style={{ display: showUpdateModal === false && 'none' }}>
 
-        <UpdateMedForm
-          {...Button => (this.btn = Button)}
+        <MedicationUpdateForm
           medication={updateMed}
-          overrides={{
-            Icon: {
-              as: 'button',
-              onClick: () => setShowUpdateModal(false)
-            }
+          onSubmit={(fields) => {
+            // Example function to trim all string inputs
+            const updatedFields = {}
+            Object.keys(fields).forEach(key => {
+              if (typeof fields[key] === 'string') {
+                updatedFields[key] = fields[key].trim()
+              } else {
+                updatedFields[key] = fields[key]
+              }
+            })
+            return updatedFields
+          }}
+          onCancel={() => {
+            setShowUpdateModal(false)
+          }}
+          onSuccess={() => {
+            setShowAddModal(false)
           }}
         />
       </div>
     </>
   );
 }
+
 
 export default withAuthenticator(Dashboard);

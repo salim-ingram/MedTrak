@@ -15,14 +15,12 @@ export declare type ValidationFunction<T> = (value: T, validationResponse: Valid
 export declare type MedicationCreateFormInputValues = {
     medName?: string;
     medQuantity?: number;
-    daysLeft?: number;
     medStrength?: number;
     dailyDose?: number;
 };
 export declare type MedicationCreateFormValidationValues = {
     medName?: ValidationFunction<string>;
     medQuantity?: ValidationFunction<number>;
-    daysLeft?: ValidationFunction<number>;
     medStrength?: ValidationFunction<number>;
     dailyDose?: ValidationFunction<number>;
 };
@@ -31,7 +29,6 @@ export declare type MedicationCreateFormOverridesProps = {
     MedicationCreateFormGrid?: PrimitiveOverrideProps<GridProps>;
     medName?: PrimitiveOverrideProps<TextFieldProps>;
     medQuantity?: PrimitiveOverrideProps<TextFieldProps>;
-    daysLeft?: PrimitiveOverrideProps<TextFieldProps>;
     medStrength?: PrimitiveOverrideProps<TextFieldProps>;
     dailyDose?: PrimitiveOverrideProps<TextFieldProps>;
 } & EscapeHatchProps;
@@ -42,6 +39,7 @@ export declare type MedicationCreateFormProps = React.PropsWithChildren<{
     onSubmit?: (fields: MedicationCreateFormInputValues) => MedicationCreateFormInputValues;
     onSuccess?: (fields: MedicationCreateFormInputValues) => void;
     onError?: (fields: MedicationCreateFormInputValues, errorMessage: string) => void;
+    onCancel?: () => void;
     onChange?: (fields: MedicationCreateFormInputValues) => MedicationCreateFormInputValues;
     onValidate?: MedicationCreateFormValidationValues;
 } & React.CSSProperties>;

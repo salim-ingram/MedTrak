@@ -14,25 +14,19 @@ export declare type ValidationResponse = {
 };
 export declare type ValidationFunction<T> = (value: T, validationResponse: ValidationResponse) => ValidationResponse | Promise<ValidationResponse>;
 export declare type MedicationUpdateFormInputValues = {
-    medName?: string;
     medQuantity?: number;
-    daysLeft?: number;
     medStrength?: number;
     dailyDose?: number;
 };
 export declare type MedicationUpdateFormValidationValues = {
-    medName?: ValidationFunction<string>;
     medQuantity?: ValidationFunction<number>;
-    daysLeft?: ValidationFunction<number>;
     medStrength?: ValidationFunction<number>;
     dailyDose?: ValidationFunction<number>;
 };
 export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
 export declare type MedicationUpdateFormOverridesProps = {
     MedicationUpdateFormGrid?: PrimitiveOverrideProps<GridProps>;
-    medName?: PrimitiveOverrideProps<TextFieldProps>;
     medQuantity?: PrimitiveOverrideProps<TextFieldProps>;
-    daysLeft?: PrimitiveOverrideProps<TextFieldProps>;
     medStrength?: PrimitiveOverrideProps<TextFieldProps>;
     dailyDose?: PrimitiveOverrideProps<TextFieldProps>;
 } & EscapeHatchProps;
@@ -44,6 +38,7 @@ export declare type MedicationUpdateFormProps = React.PropsWithChildren<{
     onSubmit?: (fields: MedicationUpdateFormInputValues) => MedicationUpdateFormInputValues;
     onSuccess?: (fields: MedicationUpdateFormInputValues) => void;
     onError?: (fields: MedicationUpdateFormInputValues, errorMessage: string) => void;
+    onCancel?: () => void;
     onChange?: (fields: MedicationUpdateFormInputValues) => MedicationUpdateFormInputValues;
     onValidate?: MedicationUpdateFormValidationValues;
 } & React.CSSProperties>;
