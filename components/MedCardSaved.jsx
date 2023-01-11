@@ -147,9 +147,10 @@ export default function MedCard(props) {
           position="relative"
           padding="0px 0px 0px 0px"
           whiteSpace="pre-wrap"
-          children={medication?.medQuantity}
           {...getOverrideProps(overrides, "120")}
-        ></Text>
+        >
+          {medication?.medQuantity}
+        </Text>
         <Flex
           gap="2px"
           direction="row"
@@ -180,9 +181,10 @@ export default function MedCard(props) {
             position="relative"
             padding="0px 0px 0px 0px"
             whiteSpace="pre-wrap"
-            children={medication?.daysLeft}
             {...getOverrideProps(overrides, "30")}
-          ></Text>
+          >
+            {medication?.daysLeft}
+          </Text>
           <Text
             fontFamily="Inter"
             fontSize="16px"
@@ -201,9 +203,10 @@ export default function MedCard(props) {
             position="relative"
             padding="0px 0px 0px 0px"
             whiteSpace="pre-wrap"
-            children="days"
             {...getOverrideProps(overrides, "days")}
-          ></Text>
+          >
+            days
+          </Text>
         </Flex>
       </Flex>
       <Flex
@@ -249,9 +252,10 @@ export default function MedCard(props) {
             position="relative"
             padding="0px 0px 0px 0px"
             whiteSpace="pre-wrap"
-            children={medication?.medName}
             {...getOverrideProps(overrides, "Med Name")}
-          ></Text>
+          >
+            {medication?.medName}
+          </Text>
           <Flex
             gap="12px"
             direction="row"
@@ -294,9 +298,10 @@ export default function MedCard(props) {
                 position="relative"
                 padding="0px 0px 0px 0px"
                 whiteSpace="pre-wrap"
-                children={medication?.medStrength}
                 {...getOverrideProps(overrides, "Med Strength")}
-              ></Text>
+              >
+                {medication?.medStrength}
+              </Text>
               <Text
                 fontFamily="Inter"
                 fontSize="16px"
@@ -315,9 +320,10 @@ export default function MedCard(props) {
                 position="relative"
                 padding="0px 0px 0px 0px"
                 whiteSpace="pre-wrap"
-                children="mg"
                 {...getOverrideProps(overrides, "Strength Unit")}
-              ></Text>
+              >
+                mg
+              </Text>
             </Flex>
           </Flex>
         </Flex>
@@ -365,9 +371,10 @@ export default function MedCard(props) {
               position="relative"
               padding="0px 0px 0px 0px"
               whiteSpace="pre-wrap"
-              children="Daily Dose"
               {...getOverrideProps(overrides, "Daily Dose")}
-            ></Text>
+            >
+              Daily Dose
+            </Text>
             <Text
               fontFamily="Inter"
               fontSize="16px"
@@ -386,9 +393,10 @@ export default function MedCard(props) {
               position="relative"
               padding="0px 0px 0px 0px"
               whiteSpace="pre-wrap"
-              children={medication?.dailyDose}
               {...getOverrideProps(overrides, "4")}
-            ></Text>
+            >
+              {medication?.dailyDose}
+            </Text>
           </Flex>
           <Link
             gap="8px"
@@ -436,9 +444,10 @@ export default function MedCard(props) {
                 position="relative"
                 padding="0px 0px 0px 0px"
                 whiteSpace="pre-wrap"
-                children="Take"
                 {...getOverrideProps(overrides, "label")}
-              ></Text>
+              >
+                Take
+              </Text>
             </Flex>
           </Link>
         </Flex>
