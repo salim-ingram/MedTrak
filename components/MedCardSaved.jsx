@@ -18,7 +18,7 @@ export default function MedCard(props) {
     <Flex
       gap="0"
       direction="column"
-      width="260px"
+      width="auto"
       height="unset"
       justifyContent="flex-end"
       alignItems="center"
@@ -32,7 +32,7 @@ export default function MedCard(props) {
       <Flex
         gap="1px"
         direction="row"
-        width="260px"
+        width='auto'
         height="unset"
         justifyContent="space-between"
         alignItems="flex-start"
@@ -224,7 +224,7 @@ export default function MedCard(props) {
         <Flex
           gap="5px"
           direction="column"
-          width="240px"
+          width="auto"
           height="unset"
           justifyContent="flex-start"
           alignItems="flex-start"
@@ -244,7 +244,7 @@ export default function MedCard(props) {
             display="block"
             direction="column"
             justifyContent="unset"
-            width="unset"
+            width="max-content"
             height="unset"
             gap="unset"
             alignItems="unset"
@@ -259,7 +259,7 @@ export default function MedCard(props) {
           <Flex
             gap="12px"
             direction="row"
-            width="unset"
+            width="max-content"
             height="unset"
             justifyContent="flex-start"
             alignItems="flex-start"
@@ -271,7 +271,7 @@ export default function MedCard(props) {
             <Flex
               gap="0"
               direction="row"
-              width="unset"
+              width="max-content"
               height="unset"
               justifyContent="flex-start"
               alignItems="flex-start"
@@ -290,7 +290,7 @@ export default function MedCard(props) {
                 display="block"
                 direction="column"
                 justifyContent="unset"
-                width="unset"
+                width="max-content"
                 height="unset"
                 gap="unset"
                 alignItems="unset"
@@ -312,7 +312,7 @@ export default function MedCard(props) {
                 display="block"
                 direction="column"
                 justifyContent="unset"
-                width="unset"
+                width="max-content"
                 height="unset"
                 gap="unset"
                 alignItems="unset"
@@ -328,9 +328,9 @@ export default function MedCard(props) {
           </Flex>
         </Flex>
         <Flex
-          gap="0"
+          gap="20"
           direction="row"
-          width="240px"
+          width="max-content"
           height="unset"
           justifyContent="center"
           alignItems="center"
@@ -342,7 +342,7 @@ export default function MedCard(props) {
           <Flex
             gap="8px"
             direction="column"
-            width="unset"
+            width="max-content"
             height="unset"
             justifyContent="flex-start"
             alignItems="flex-start"
@@ -363,7 +363,7 @@ export default function MedCard(props) {
               display="block"
               direction="column"
               justifyContent="unset"
-              width="unset"
+              width="max-content"
               height="unset"
               gap="unset"
               alignItems="unset"
@@ -385,7 +385,7 @@ export default function MedCard(props) {
               display="block"
               direction="column"
               justifyContent="unset"
-              width="unset"
+              width="max-content"
               height="unset"
               gap="unset"
               alignItems="unset"
@@ -401,7 +401,7 @@ export default function MedCard(props) {
           <Link
             gap="8px"
             direction="column"
-            width="unset"
+            width="max-content"
             height="unset"
             justifyContent="center"
             alignItems="flex-end"
@@ -413,7 +413,7 @@ export default function MedCard(props) {
             <Flex
               gap="0"
               direction="row"
-              width="unset"
+              width="max-content"
               height="unset"
               justifyContent="center"
               alignItems="center"
@@ -436,7 +436,7 @@ export default function MedCard(props) {
                 display="block"
                 direction="column"
                 justifyContent="unset"
-                width="unset"
+                width="max-content"
                 height="unset"
                 gap="unset"
                 alignItems="unset"
